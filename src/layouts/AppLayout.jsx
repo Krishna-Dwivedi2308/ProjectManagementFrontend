@@ -8,9 +8,7 @@ const AppLayout = () => {
       <main className="">
         <Header />
         <Outlet />
-        
       </main>
-      
     </div>
   );
 };

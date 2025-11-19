@@ -54,8 +54,6 @@
 //     }))
 //   }
 
-
-
 //   const handleLogin = async () => {
 //     setErrors({});
 //     try {
@@ -123,25 +121,25 @@
 //         </CardContent>
 
 //         <CardFooter>
-//           <Button 
+//           <Button
 //           className='mb-3 w-full'
-//           onClick={handleLogin} 
-//           type='submit' 
-//           disabled={loading} 
+//           onClick={handleLogin}
+//           type='submit'
+//           disabled={loading}
 //           >
 //             {loading ? <BeatLoader size={10} color='#000000' /> : 'Login'}
 //           </Button>
-          
+
 //           {/* <Link to="/signup">Forgot Password </Link> */}
-//           <Button 
+//           <Button
 //           className='mb-3 w-full'
-//           variant="outline" 
+//           variant="outline"
 //           onClick={() => setOpenDialog(true)}
 //           >
 //             Resend Verification Email
 //           </Button>      {/* <Link to="/signup">Resend Verification Email </Link> */}
-//           <Button 
-//           variant="outline" 
+//           <Button
+//           variant="outline"
 //           onClick={() => setOpenDialog(true)}
 //           >
 //             Forgot Password
@@ -163,7 +161,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -179,7 +177,7 @@ const Login = () => {
   const [formData, setformData] = useState({
     email: '',
     username: '',
-    password: ''
+    password: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -192,20 +190,20 @@ const Login = () => {
     try {
       setLoading(true);
       await fnlogin(formData);
-      navigate("/dashboard");
+      navigate('/dashboard');
     } catch (error) {
-      setError(error.message || "Login failed");
+      setError(error.message || 'Login failed');
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleInput = (e) => {
+  const handleInput = e => {
     const { name, value } = e.target;
-    setformData((prev) => ({
+    setformData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -213,18 +211,18 @@ const Login = () => {
     setErrors({});
     try {
       const schema = Yup.object().shape({
-        email: Yup.string().email("Invalid Email"),
+        email: Yup.string().email('Invalid Email'),
         username: Yup.string(),
         password: Yup.string()
-          .min(6, "Password must be at least 6 char long")
-          .required("Password is required"),
+          .min(6, 'Password must be at least 6 char long')
+          .required('Password is required'),
       });
 
       await schema.validate(formData, { abortEarly: false });
       await loginTrigger();
     } catch (error) {
       const newErrors = {};
-      error?.inner?.forEach((err) => {
+      error?.inner?.forEach(err => {
         newErrors[err.path] = err.message;
       });
       setErrors(newErrors);
@@ -234,20 +232,15 @@ const Login = () => {
   return (
     <>
       {/* Dialog */}
-      <ResendVerificationDialog
-        open={openDialog}
-        onOpenChange={setOpenDialog}
-      />
+      <ResendVerificationDialog open={openDialog} onOpenChange={setOpenDialog} />
       <PasswordResetDialog
-      open={openPasswordResetDialog}
-      onOpenChange={setOpenPasswordResetDialog}
+        open={openPasswordResetDialog}
+        onOpenChange={setOpenPasswordResetDialog}
       />
       <Card>
         <CardHeader>
           <CardTitle>Login</CardTitle>
-          <CardDescription>
-            Enter the email and password to login
-          </CardDescription>
+          <CardDescription>Enter the email and password to login</CardDescription>
           {error && <p className="text-red-500">{error}</p>}
         </CardHeader>
 
@@ -288,21 +281,12 @@ const Login = () => {
 
         <CardFooter className="flex flex-col w-full space-y-3">
           {/* Login Button */}
-          <Button
-            className="w-full"
-            onClick={handleLogin}
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? <BeatLoader size={10} color="#000000" /> : "Login"}
+          <Button className="w-full" onClick={handleLogin} type="submit" disabled={loading}>
+            {loading ? <BeatLoader size={10} color="#000000" /> : 'Login'}
           </Button>
 
           {/* Resend Verification Email */}
-          <Button
-            className="w-full"
-            variant="outline"
-            onClick={() => setOpenDialog(true)}
-          >
+          <Button className="w-full" variant="outline" onClick={() => setOpenDialog(true)}>
             Resend Verification Email
           </Button>
 

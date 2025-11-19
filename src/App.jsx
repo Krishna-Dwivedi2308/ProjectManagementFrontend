@@ -10,7 +10,6 @@ import UserProvider from '../Context';
 import UserEmailVerification from './pages/UserEmailVerification';
 import PasswordResetVerification from './pages/PasswordResetVerification';
 
-
 function App() {
   const router = createBrowserRouter([
     {
@@ -22,23 +21,23 @@ function App() {
         },
         {
           path: '/auth',
-          element: <Auth/>,
+          element: <Auth />,
         },
         {
           path: '/dashboard',
-          element: <Dashboard/>,
+          element: <Dashboard />,
         },
         {
           path: '/profile',
-          element: <Profile/>,
+          element: <Profile />,
         },
         {
           path: '/api/v1/auth/verify-email',
-          element: <UserEmailVerification/>,
+          element: <UserEmailVerification />,
         },
         {
           path: '/api/v1/auth/reset-password',
-          element: <PasswordResetVerification/>,
+          element: <PasswordResetVerification />,
         },
       ],
     },

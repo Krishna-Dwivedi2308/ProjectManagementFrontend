@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -6,28 +6,28 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { BeatLoader } from "react-spinners";
-import * as Yup from "yup";
-import { fnRegisterUser } from "@/services/apiAuth";
+} from '@/components/ui/card';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
+import { BeatLoader } from 'react-spinners';
+import * as Yup from 'yup';
+import { fnRegisterUser } from '@/services/apiAuth';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    username: "", // added username
-    email: "",
-    password: "",
+    name: '',
+    username: '', // added username
+    email: '',
+    password: '',
     profile_pic: null,
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [apiError, setApiError] = useState("");
+  const [apiError, setApiError] = useState('');
 
-  const handleInput = (e) => {
+  const handleInput = e => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: files ? files[0] : value,
     }));
@@ -35,16 +35,18 @@ const Signup = () => {
 
   const handleSignup = async () => {
     setErrors({});
-    setApiError("");
+    setApiError('');
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().required("Name is Required"),
-        username: Yup.string().min(3, "Username must be at least 3 chars").required("Username is required"),
-        email: Yup.string().email("Invalid Email").required("Email is required"),
+        name: Yup.string().required('Name is Required'),
+        username: Yup.string()
+          .min(3, 'Username must be at least 3 chars')
+          .required('Username is required'),
+        email: Yup.string().email('Invalid Email').required('Email is required'),
         password: Yup.string()
-          .min(6, "Password must be at least 6 chars")
-          .required("Password is required"),
-        profile_pic: Yup.mixed().required("Profile Pic is Required"),
+          .min(6, 'Password must be at least 6 chars')
+          .required('Password is required'),
+        profile_pic: Yup.mixed().required('Profile Pic is Required'),
       });
 
       await schema.validate(formData, { abortEarly: false });
@@ -52,17 +54,17 @@ const Signup = () => {
       setLoading(true);
       const res = await fnRegisterUser(formData);
 
-      console.log("Signup success:", res);
+      console.log('Signup success:', res);
     } catch (error) {
       if (error.inner) {
         // Yup validation errors
         const newErrors = {};
-        error.inner.forEach((err) => {
+        error.inner.forEach(err => {
           newErrors[err.path] = err.message;
         });
         setErrors(newErrors);
       } else {
-        setApiError(error.message || "Signup failed");
+        setApiError(error.message || 'Signup failed');
       }
     } finally {
       setLoading(false);
@@ -73,9 +75,7 @@ const Signup = () => {
     <Card className="w-100 max-w-md mx-auto">
       <CardHeader>
         <CardTitle>Signup</CardTitle>
-        <CardDescription>
-          Create a new account if you haven't already
-        </CardDescription>
+        <CardDescription>Create a new account if you haven't already</CardDescription>
         {apiError && <p className="text-red-500">{apiError}</p>}
       </CardHeader>
       <CardContent className="space-y-2">
@@ -120,22 +120,13 @@ const Signup = () => {
           {errors.password && <p className="text-red-500">{errors.password}</p>}
         </div>
         <div className="space-y-1">
-          <Input
-            type="file"
-            name="profile_pic"
-            accept="image/*"
-            onChange={handleInput}
-          />
+          <Input type="file" name="profile_pic" accept="image/*" onChange={handleInput} />
           {errors.profile_pic && <p className="text-red-500">{errors.profile_pic}</p>}
         </div>
       </CardContent>
       <CardFooter>
         <Button onClick={handleSignup} type="submit" disabled={loading}>
-          {loading ? (
-            <BeatLoader size={10} color="#000000" />
-          ) : (
-            "Create Account"
-          )}
+          {loading ? <BeatLoader size={10} color="#000000" /> : 'Create Account'}
         </Button>
       </CardFooter>
     </Card>

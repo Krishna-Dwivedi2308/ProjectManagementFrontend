@@ -1,13 +1,8 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  CheckCircle,
-  Users,
-  ClipboardList,
-  Building2,
-} from "lucide-react";
-import { useNavigate } from "react-router";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { CheckCircle, Users, ClipboardList, Building2 } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -21,13 +16,13 @@ const LandingPage = () => {
             Manage Projects. Empower Teams.
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-            From organizations to tasks—everything you need to boost
-            productivity and streamline collaboration, all in one place.
+            From organizations to tasks—everything you need to boost productivity and streamline
+            collaboration, all in one place.
           </p>
           <Button
             size="lg"
             className="px-10 py-6 text-lg rounded-2xl bg-blue-600 hover:bg-blue-700"
-            onClick={() => navigate("/auth")}
+            onClick={() => navigate('/auth')}
           >
             Get Started Free
           </Button>
@@ -45,27 +40,23 @@ const LandingPage = () => {
         {[
           {
             icon: <Building2 className="mx-auto w-12 h-12 text-blue-400 mb-4" />,
-            title: "Organizations",
-            desc: "Create and manage multiple organizations seamlessly.",
+            title: 'Organizations',
+            desc: 'Create and manage multiple organizations seamlessly.',
           },
           {
-            icon: (
-              <ClipboardList className="mx-auto w-12 h-12 text-green-400 mb-4" />
-            ),
-            title: "Projects & Tasks",
-            desc: "Organize projects into tasks and subtasks for clarity.",
+            icon: <ClipboardList className="mx-auto w-12 h-12 text-green-400 mb-4" />,
+            title: 'Projects & Tasks',
+            desc: 'Organize projects into tasks and subtasks for clarity.',
           },
           {
             icon: <Users className="mx-auto w-12 h-12 text-purple-400 mb-4" />,
-            title: "Members & Roles",
-            desc: "Add members, assign roles, and collaborate efficiently.",
+            title: 'Members & Roles',
+            desc: 'Add members, assign roles, and collaborate efficiently.',
           },
           {
-            icon: (
-              <CheckCircle className="mx-auto w-12 h-12 text-orange-400 mb-4" />
-            ),
-            title: "Productivity",
-            desc: "Streamline teamwork and finish projects faster.",
+            icon: <CheckCircle className="mx-auto w-12 h-12 text-orange-400 mb-4" />,
+            title: 'Productivity',
+            desc: 'Streamline teamwork and finish projects faster.',
           },
         ].map((f, i) => (
           <Card
@@ -89,12 +80,15 @@ const LandingPage = () => {
           </h2>
           <div className="grid md:grid-cols-4 gap-10 text-gray-300">
             {[
-              { step: "1", title: "Create Organization", desc: "Set up your org space." },
-              { step: "2", title: "Add Projects", desc: "Break down work into tasks." },
-              { step: "3", title: "Invite Members", desc: "Assign roles & collaborate." },
-              { step: "4", title: "Track Progress", desc: "Stay on top with real-time updates." },
+              { step: '1', title: 'Create Organization', desc: 'Set up your org space.' },
+              { step: '2', title: 'Add Projects', desc: 'Break down work into tasks.' },
+              { step: '3', title: 'Invite Members', desc: 'Assign roles & collaborate.' },
+              { step: '4', title: 'Track Progress', desc: 'Stay on top with real-time updates.' },
             ].map((s, i) => (
-              <div key={i} className="relative p-6 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-600 transition">
+              <div
+                key={i}
+                className="relative p-6 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-600 transition"
+              >
                 <div className="text-3xl font-bold text-blue-400 mb-4">{s.step}</div>
                 <h3 className="font-semibold text-lg mb-2">{s.title}</h3>
                 <p>{s.desc}</p>
@@ -112,7 +106,7 @@ const LandingPage = () => {
         <Button
           size="lg"
           className="px-10 py-6 text-lg rounded-2xl bg-blue-600 hover:bg-blue-700"
-          onClick={() => navigate("/auth")}
+          onClick={() => navigate('/auth')}
         >
           Sign Up Now
         </Button>
