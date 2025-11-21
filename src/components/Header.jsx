@@ -21,7 +21,16 @@ const Header = () => {
         </div>
 
         {/* Navigation */}
-        {user ? null : (
+        {user ? (
+          <nav>
+            <Link to="/dashboard" className="hover:text-blue-400 transition-colors m-2 p-2">
+              Admin Panel
+            </Link>
+            <Link to="/myprojects" className="hover:text-blue-400 transition-colors m-2 p-2">
+              Projects
+            </Link>
+          </nav>
+        ) : (
           <nav className="hidden md:flex space-x-10 text-gray-300 font-medium">
             <a href="#features" className="hover:text-blue-400 transition-colors">
               Features

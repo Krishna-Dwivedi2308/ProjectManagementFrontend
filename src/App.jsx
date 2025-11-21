@@ -9,6 +9,9 @@ import Profile from './pages/Profile';
 import UserProvider from '../Context';
 import UserEmailVerification from './pages/UserEmailVerification';
 import PasswordResetVerification from './pages/PasswordResetVerification';
+import Organization from './pages/Organization';
+import AllProjects from './pages/AllProjects';
+import Project from './pages/Project';
 
 function App() {
   const router = createBrowserRouter([
@@ -38,6 +41,18 @@ function App() {
         {
           path: '/api/v1/auth/reset-password',
           element: <PasswordResetVerification />,
+        },
+        {
+          path: '/organization/:id',
+          element: <Organization />,
+        },
+        {
+          path: '/myprojects',
+          element: <AllProjects />,
+        },
+        {
+          path: '/project/:id',
+          element: <Project />,
         },
       ],
     },

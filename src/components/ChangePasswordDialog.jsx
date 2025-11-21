@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import * as Yup from 'yup';
-// adjust this path to where your API helpers live
+// adjust this path to
 import { fnChangePassword } from '@/services/apiAuth';
 import { useNavigate } from 'react-router';
 
