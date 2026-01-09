@@ -26,12 +26,11 @@ const Profile = () => {
       const res = await fngetCurrentUser();
       setUser(res.data);
     } catch (error) {
-      console.error(error.message);
+      // console.error(error.message);
     } finally {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     getUserTrigger();
   }, []);
@@ -39,10 +38,10 @@ const Profile = () => {
     try {
       setLoading(true);
       const data = await fnLogout();
+      getUserTrigger();
       setUser(null);
       navigate('/');
     } catch (error) {
-      console.error(error.message);
       setLogoutError(error?.message || 'Failed to Logout');
     } finally {
       setLoading(false);
@@ -55,7 +54,6 @@ const Profile = () => {
       </div>
     );
   }
-
   if (!user) {
     return (
       <div className="flex justify-center items-center h-screen text-gray-400">
@@ -92,7 +90,7 @@ const Profile = () => {
             <p>{new Date(user.createdAt).toLocaleDateString()}</p>
           </div>
           <div>
-            <span className="text-gray-400">Last Updated:</span>
+            <span className="text-gray-400">Last Login:</span>
             <p>{new Date(user.updatedAt).toLocaleDateString()}</p>
           </div>
         </CardContent>
@@ -105,7 +103,7 @@ const Profile = () => {
           >
             Change Password
           </Button>
-          <Button className="bg-red-600 hover:bg-red-700" onClick={logoutTrigger}>
+          <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={logoutTrigger}>
             Logout
           </Button>
           {logoutError && <p className="text-red-500 text-sm mt-2">{logoutError}</p>}

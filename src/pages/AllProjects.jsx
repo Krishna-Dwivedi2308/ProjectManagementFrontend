@@ -7,10 +7,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { fnGetAllProjects } from '@/services/apiProject';
 import { Separator } from '@radix-ui/react-separator';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { fnGetAllProjects } from '@/services/apiProject';
+import { Loader2 } from 'lucide-react';
 
 const AllProjects = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const AllProjects = () => {
         setLoading(true);
         const response = await fnGetAllProjects();
         // window.location.reload();
-        // console.log(response.data);
+        console.log(response.data);
         setprojects(response.data);
         setLoading(false);
       } catch (error) {
@@ -37,10 +38,29 @@ const AllProjects = () => {
   }, []);
 
   if (error) {
-    return <p>{error.message}</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen ">
+        <Card className="w-full max-w-md shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-center text-red-600">Error:</CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <p className="text-center text-red-500 font-medium">{error.message}</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="pt-20 flex items-center justify-center min-h-screen">
+        <div className="flex items-center gap-3 text-gray-300">
+          <Loader2 className="animate-spin" />
+          <span>Loading your projects</span>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -58,9 +78,9 @@ const AllProjects = () => {
               <CardDescription className="text-gray-400">{project.description}</CardDescription>
             </CardHeader>
 
-            <Separator className="bg-gray-800" />
+            <Separator className="bg-gray-400" />
 
-            <CardContent className="text-sm text-gray-300 space-y-2 mt-3">
+            <CardContent className="text-sm text-gray-300 space-y-2 mt-1">
               <p>
                 <span className="text-gray-400">Organization:</span> {project.organization.name}
               </p>
@@ -78,12 +98,16 @@ const AllProjects = () => {
                 {new Date(project.updatedAt).toLocaleString()}
               </p>
               <p>
+                <span className="text-gray-400">Project Admins : </span>
                 {project.projectAdmins.length > 0
-                  ? 'Project Admins Here'
+                  ? project.projectAdmins.map((member, index) => (
+                      <span>
+                        {index + 1}. {member.user.fullname} |{' '}
+                      </span>
+                    ))
                   : 'No Project Admins assigned yet'}
               </p>
             </CardContent>
-
             <CardFooter className="flex justify-end">
               <Button
                 variant="outline"

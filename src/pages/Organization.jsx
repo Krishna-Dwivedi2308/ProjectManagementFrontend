@@ -21,6 +21,9 @@ const OrganizationDetails = () => {
   console.log(id);
 
   const [org, setOrg] = useState(null);
+  const [open, setopen] = useState(false);
+  const [openCreate, setopenCreate] = useState(false);
+  const [openupdate, setopenupdate] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +32,7 @@ const OrganizationDetails = () => {
     };
     fetchData();
   }, [id]);
-  console.log(org);
+  // console.log(org);
 
   if (!org) return <div>Loading...</div>;
 
@@ -70,12 +73,13 @@ const OrganizationDetails = () => {
             </div>
           </div>
           <span className="flex justify-end">
-            <CreateProject
-              id={id}
-              trigger=<Button className="m-2 p-2 bg-green-500 hover:bg-green-400 ">
-                Create New Project
-              </Button>
-            />
+            <CreateProject id={id} open={openCreate} onOpenChange={setopenCreate} />
+            <Button
+              className="m-2 p-2 bg-green-500 hover:bg-green-400 "
+              onClick={() => setopenCreate(true)}
+            >
+              Create New Project
+            </Button>
           </span>
           <div className="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {org.projects?.length > 0 ? (
@@ -104,24 +108,25 @@ const OrganizationDetails = () => {
             Back
           </Button>
 
-          <DeleteOrganizationAlert
-            id={id}
-            trigger={
-              <Button
-                variant="destructive"
-                className="bg-red-600 hover:bg-red-700 p-2 mt-2 mx-2"
-                onClick={() => {
-                  console.log('button clicked for delete');
-                }}
-              >
-                Delete Organization
-              </Button>
-            }
-          />
-          <UpdateOrganization
-            id={id}
-            trigger=<Button className="mt-2 p-2">Update Organization Name</Button>
-          />
+          <DeleteOrganizationAlert id={id} open={open} onOpenChange={setopen} />
+          <Button
+            variant="destructive"
+            className="bg-red-600 hover:bg-red-700 p-2 mt-2 mx-2"
+            onClick={() => {
+              console.log('button clicked for delete');
+              setopen(true);
+            }}
+          >
+            Delete Organization
+          </Button>
+          {/* <UpdateOrganization
+                        id={id}
+                        trigger=<Button className="mt-2 p-2">Update Organization Name</Button>
+                    /> */}
+          <UpdateOrganization id={id} open={openupdate} onOpenChange={setopenupdate} />
+          <Button className="mt-2 p-2" onClick={() => setopenupdate(true)}>
+            Update Organization Name
+          </Button>
         </CardFooter>
       </Card>
     </div>

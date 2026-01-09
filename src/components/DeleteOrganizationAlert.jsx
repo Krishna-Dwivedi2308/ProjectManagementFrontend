@@ -14,7 +14,7 @@ import { deleteOrganizationById } from '@/services/apiOrganization';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-export function DeleteOrganizationAlert({ trigger, id }) {
+export function DeleteOrganizationAlert({ open, onOpenChange, id }) {
   const navigate = useNavigate();
   const [state, setstate] = useState({
     loading: false,
@@ -49,8 +49,8 @@ export function DeleteOrganizationAlert({ trigger, id }) {
   //  }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
+      {/* <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger> */}
       <AlertDialogContent>
         <AlertDialogHeader>
           {state.error && <p className="text-red-600">{state.error}</p>}
@@ -63,10 +63,11 @@ export function DeleteOrganizationAlert({ trigger, id }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="m-0 p-0">
-            <Button className="bg-red-600 hover:bg-red-700 " onClick={handleDeleteOrganization}>
-              Delete
-            </Button>
+          <AlertDialogAction
+            className="m-0  bg-red-600 hover:bg-red-700 text-white"
+            onClick={handleDeleteOrganization}
+          >
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

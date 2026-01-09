@@ -12,8 +12,9 @@ import * as Yup from 'yup';
 import React, { useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { fnCreateProject } from '@/services/apiProject';
-const CreateProject = ({ trigger, id }) => {
+import { fnCreateProject } from '@/services/apiProject.js';
+
+const CreateProject = ({ open, onOpenChange, id }) => {
   const [state, setstate] = useState({
     loading: false,
     error: '',
@@ -61,8 +62,8 @@ const CreateProject = ({ trigger, id }) => {
 
   return (
     <div>
-      <Dialog>
-        <DialogTrigger>{trigger}</DialogTrigger>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        {/* <DialogTrigger asChild>{trigger}</DialogTrigger> */}
         <DialogContent>
           {state.error && <p className="text-red-600">{state.error}</p>}
           {state.message && <p className="text-green-600">{state.message}</p>}

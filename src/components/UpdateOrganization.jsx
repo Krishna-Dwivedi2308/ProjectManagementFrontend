@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { updateOrganization } from '@/services/apiOrganization';
 
-const UpdateOrganization = ({ trigger, id }) => {
+const UpdateOrganization = ({ open, onOpenChange, id }) => {
   console.log(id);
 
   const [name, setname] = useState('');
@@ -83,8 +83,8 @@ const UpdateOrganization = ({ trigger, id }) => {
 
   return (
     <div>
-      <Dialog>
-        <DialogTrigger>{trigger}</DialogTrigger>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        {/* <DialogTrigger>{trigger}</DialogTrigger> */}
         <DialogContent>
           {state.error && <p className="text-red-600">{state.error}</p>}
           {state.message && <p className="text-green-600">{state.message}</p>}

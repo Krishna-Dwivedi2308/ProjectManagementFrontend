@@ -12,6 +12,9 @@ import PasswordResetVerification from './pages/PasswordResetVerification';
 import Organization from './pages/Organization';
 import AllProjects from './pages/AllProjects';
 import Project from './pages/Project';
+import AddMemberVerify from './pages/AddMemberVerify';
+import MyTasks from './pages/MyTasks';
+import TaskPage from './pages/TaskPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +56,18 @@ function App() {
         {
           path: '/project/:id',
           element: <Project />,
+        },
+        {
+          path: '/api/v1/project/addMember',
+          element: <AddMemberVerify />,
+        },
+        {
+          path: '/mytasks',
+          element: <MyTasks />,
+        },
+        {
+          path: '/task/:projectId/:taskId',
+          element: <TaskPage />,
         },
       ],
     },

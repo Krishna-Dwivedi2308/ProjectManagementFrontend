@@ -171,8 +171,10 @@ import { fnlogin } from '@/services/apiAuth';
 import { useNavigate } from 'react-router';
 import ResendVerificationDialog from './ResendVerificationDialog';
 import PasswordResetDialog from './PasswordResetDialog';
+import { UseUserState } from '../../Context';
 const Login = () => {
   const navigate = useNavigate();
+  const { getUserTrigger } = UseUserState();
 
   const [formData, setformData] = useState({
     email: '',
@@ -190,7 +192,9 @@ const Login = () => {
     try {
       setLoading(true);
       await fnlogin(formData);
-      navigate('/dashboard');
+      await getUserTrigger();
+
+      navigate('/myprojects');
     } catch (error) {
       setError(error.message || 'Login failed');
       console.log(error);

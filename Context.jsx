@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
       setUser(res.data);
     } catch (error) {
       setError(error.response?.data?.message || error.message);
-      //   console.error(error.message);
+      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
     getUserTrigger();
   }, []);
   return (
-    <UserContext.Provider value={{ user, loading, getUserTrigger, error }}>
+    <UserContext.Provider value={{ user, loading, getUserTrigger, error, setUser }}>
       {children}
     </UserContext.Provider>
   );

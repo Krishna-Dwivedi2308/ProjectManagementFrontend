@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Link, useNavigate } from 'react-router-dom';
 import { UseUserState } from '../../Context';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 const Header = () => {
   const navigate = useNavigate();
-  const { user } = UseUserState();
+  const [user, setuser] = useState(null);
+  const { user: currentuser } = UseUserState();
+
+  useEffect(() => {
+    setuser(currentuser);
+  }, [currentuser]);
   // console.log(user);
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-950/95 backdrop-blur border-b border-gray-800 z-50">
@@ -23,12 +28,31 @@ const Header = () => {
         {/* Navigation */}
         {user ? (
           <nav>
-            <Link to="/dashboard" className="hover:text-blue-400 transition-colors m-2 p-2">
-              Admin Panel
-            </Link>
-            <Link to="/myprojects" className="hover:text-blue-400 transition-colors m-2 p-2">
-              Projects
-            </Link>
+            <div className="max-w-6xl mx-auto flex items-center justify-center gap-6 py-2">
+              <Link
+                to="/dashboard"
+                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/60 
+                 border border-transparent hover:border-gray-700 transition-all"
+              >
+                Admin Panel
+              </Link>
+
+              <Link
+                to="/myprojects"
+                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/60 
+                 border border-transparent hover:border-gray-700 transition-all"
+              >
+                My Projects
+              </Link>
+
+              <Link
+                to="/mytasks"
+                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/60 
+                 border border-transparent hover:border-gray-700 transition-all"
+              >
+                My Tasks
+              </Link>
+            </div>
           </nav>
         ) : (
           <nav className="hidden md:flex space-x-10 text-gray-300 font-medium">

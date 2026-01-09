@@ -12,10 +12,12 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import CreateOrganization from '@/components/CreateOrganization';
+import { Loader2 } from 'lucide-react';
 const Dashboard = () => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [openCreate, setopenCreate] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,8 +39,11 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="pt-20 flex items-center justify-center">
-        <p>Loading organizations...</p>
+      <div className="pt-20 flex items-center justify-center min-h-screen">
+        <div className="flex items-center gap-3 text-gray-300">
+          <Loader2 className="animate-spin" />
+          <span>Loading your organizations...</span>
+        </div>
       </div>
     );
   }
@@ -62,11 +67,6 @@ const Dashboard = () => {
           </CardContent>
 
           <CardFooter className="flex justify-end">
-            <CreateOrganization
-              trigger=<Button className="m-2 p-2 bg-green-600 hover:bg-green-500">
-                Create Organization
-              </Button>
-            />
             <Button onClick={() => window.location.reload()}>Retry</Button>
           </CardFooter>
         </Card>
@@ -80,11 +80,18 @@ const Dashboard = () => {
     <div className="pt-20 ">
       <div className="flex justify-end">
         <span>
-          <CreateOrganization
-            trigger=<Button className="m-2 p-2 bg-green-600 hover:bg-green-500">
+          <CreateOrganization open={openCreate} onOpenChange={setopenCreate} />
+          <Button
+            className="m-2 p-2 bg-green-600 hover:bg-green-500"
+            onClick={() => setopenCreate(true)}
+          >
+            Create Organization
+          </Button>
+          {/* <CreateOrganization
+            trigger={<Button className="m-2 p-2 bg-green-600 hover:bg-green-500">
               Create Organization
-            </Button>
-          />
+            </Button>}
+          /> */}
         </span>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
