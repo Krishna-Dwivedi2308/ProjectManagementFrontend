@@ -53,7 +53,22 @@ const Dashboard = () => {
     return (
       <div className="pt-20 flex items-center justify-center px-4">
         <span></span>
-
+        <div className="flex justify-end">
+          <span>
+            <CreateOrganization open={openCreate} onOpenChange={setopenCreate} />
+            <Button
+              className="m-2 p-2 bg-green-600 hover:bg-green-500"
+              onClick={() => setopenCreate(true)}
+            >
+              Create Organization
+            </Button>
+            {/* <CreateOrganization
+            trigger={<Button className="m-2 p-2 bg-green-600 hover:bg-green-500">
+              Create Organization
+            </Button>}
+          /> */}
+          </span>
+        </div>
         <Card className="w-full max-w-md bg-gray-950 border border-red-700/40 shadow-lg">
           <CardHeader>
             {/* <CardTitle className="text-red-400">Something Went Wrong</CardTitle> */}
