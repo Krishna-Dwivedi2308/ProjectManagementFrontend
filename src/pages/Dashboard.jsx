@@ -51,38 +51,30 @@ const Dashboard = () => {
   if (error) {
     // console.log(error);
     return (
-      <div className="pt-20 flex items-center justify-center px-4">
-        <span></span>
-        <div className="flex justify-end">
-          <span>
-            <CreateOrganization open={openCreate} onOpenChange={setopenCreate} />
-            <Button
-              className="m-2 p-2 bg-green-600 hover:bg-green-500"
-              onClick={() => setopenCreate(true)}
-            >
-              Create Organization
-            </Button>
-            {/* <CreateOrganization
-            trigger={<Button className="m-2 p-2 bg-green-600 hover:bg-green-500">
-              Create Organization
-            </Button>}
-          /> */}
-          </span>
-        </div>
-        <Card className="w-full max-w-md bg-gray-950 border border-red-700/40 shadow-lg">
+      <div className="flex items-center justify-center min-h-screen ">
+        <Card className="w-full max-w-lg bg-gray-950 border border-gray-800 shadow-lg">
           <CardHeader>
-            {/* <CardTitle className="text-red-400">Something Went Wrong</CardTitle> */}
-            <CardDescription className="text-gray-400">
-              We did not find any organizations you created.Either create one or try again.
-            </CardDescription>
+            <CardTitle className="text-white">No Organizations Found</CardTitle>
           </CardHeader>
 
           <CardContent>
+            <p className="text-gray-300">
+              When you are admin of an Organization, it will appear here.
+            </p>
             <p className="text-red-500 text-sm">{error}</p>
           </CardContent>
 
-          <CardFooter className="flex justify-end">
+          <CardFooter className="flex justify-center">
             <Button onClick={() => window.location.reload()}>Retry</Button>
+            <div className="flex justify-end p-2">
+              <CreateOrganization open={openCreate} onOpenChange={setopenCreate} />
+              <Button
+                className="p-2 bg-green-600 hover:bg-green-500"
+                onClick={() => setopenCreate(true)}
+              >
+                Create Organization
+              </Button>
+            </div>
           </CardFooter>
         </Card>
       </div>

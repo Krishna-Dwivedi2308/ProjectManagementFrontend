@@ -24,13 +24,6 @@ const OrganizationCard = ({ name, admin, createdAt, updatedAt, onOpenDetails }) 
 
       <CardContent className="text-gray-300 space-y-4 mt-4">
         <div className="flex items-center gap-2">
-          <User size={16} className="text-gray-400" />
-          <p>
-            <span className="text-gray-400">Admin:</span> <Badge variant="outline">{admin}</Badge>
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
           <Calendar size={16} className="text-gray-400" />
           <p>
             <span className="text-gray-400">Created:</span>{' '}

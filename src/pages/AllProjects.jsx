@@ -40,14 +40,25 @@ const AllProjects = () => {
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-screen ">
-        <Card className="w-full max-w-md shadow-lg">
+        <Card className="w-full max-w-lg bg-gray-950 border border-gray-800 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-center text-red-600">Error:</CardTitle>
+            <CardTitle className="text-white">No Projects Found</CardTitle>
+            <CardDescription className="text-gray-400">
+              You don&apos;t have any projects yet.
+            </CardDescription>
           </CardHeader>
 
           <CardContent>
-            <p className="text-center text-red-500 font-medium">{error.message}</p>
+            <p className="text-gray-300">
+              When you are assigned to a project, it will appear here.
+            </p>
           </CardContent>
+
+          <CardFooter className="flex justify-end">
+            <Button variant="outline" onClick={() => navigate('/dashboard')}>
+              Back
+            </Button>
+          </CardFooter>
         </Card>
       </div>
     );
