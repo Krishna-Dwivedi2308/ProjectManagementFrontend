@@ -44,25 +44,32 @@ const AddMemberVerify = () => {
 
     const verifyInvite = async () => {
       try {
+        let res;
+
         if (mounted) {
           setstate(s => ({ ...s, loading: true, error: '', message: '' }));
-          const res = await fnVerifyInvite({ token, email });
         }
-        // success
+
+        res = await fnVerifyInvite({ token, email });
+
         if (!mounted) return;
+
         setstate({
           loading: false,
           error: '',
           success: true,
           message: res?.data?.message || 'Invite verified successfully.',
         });
+
         navigate('/myprojects');
       } catch (err) {
         if (!mounted) return;
+
         const apiMessage =
           err?.response?.data?.message ||
           err?.message ||
           'Failed to verify invite. Please try again.';
+
         setstate({
           loading: false,
           error: apiMessage,
